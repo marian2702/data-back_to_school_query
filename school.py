@@ -1,8 +1,21 @@
-# pylint:disable=C0111,C0103
+import sqlite3
+conn = sqlite3.connect('data/school.sqlite')
+db = conn.cursor()
+
+
 
 def students_from_city(db, city):
-    """return a list of students from a specific city"""
-    pass  # YOUR CODE HERE
+    query = "SELECT first_name FROM students WHERE birth_city = ?"
+    db.execute(query, (city,))
+    students = db.fetchall()
+    return students
+
+
+
+
+
+
+
 
 
 # To test your code, you can **run it** before running `make`
@@ -11,5 +24,5 @@ def students_from_city(db, city):
 #
 # import sqlite3
 # conn = sqlite3.connect('data/school.sqlite')
-# db = conn.cursor()
-# print(students_from_city(db, 'Paris'))
+ #db = conn.cursor()
+print(students_from_city(db, 'London'))
